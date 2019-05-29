@@ -179,7 +179,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testUnmapped() throws Exception {
-        SearchResponse response = client().prepareSearch("idx_unmapped").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx_unmapped")
                 .addAggregation(cardinality("cardinality").precisionThreshold(precisionThreshold).field("str_value"))
                 .get();
 
@@ -192,7 +192,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testPartiallyUnmapped() throws Exception {
-        SearchResponse response = client().prepareSearch("idx", "idx_unmapped").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx", "idx_unmapped")
                 .addAggregation(cardinality("cardinality").precisionThreshold(precisionThreshold).field("str_value"))
                 .get();
 
@@ -205,7 +205,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testSingleValuedString() throws Exception {
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(cardinality("cardinality").precisionThreshold(precisionThreshold).field("str_value"))
                 .get();
 
@@ -218,7 +218,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testSingleValuedNumeric() throws Exception {
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(cardinality("cardinality").precisionThreshold(precisionThreshold).field(singleNumericField()))
                 .get();
 
@@ -257,7 +257,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testSingleValuedNumericHashed() throws Exception {
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(cardinality("cardinality").precisionThreshold(precisionThreshold).field(singleNumericField()))
                 .get();
 
@@ -270,7 +270,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testMultiValuedString() throws Exception {
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(cardinality("cardinality").precisionThreshold(precisionThreshold).field("str_values"))
                 .get();
 
@@ -283,7 +283,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testMultiValuedNumeric() throws Exception {
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(cardinality("cardinality").precisionThreshold(precisionThreshold).field(multiNumericField(false)))
                 .get();
 
@@ -296,7 +296,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testMultiValuedNumericHashed() throws Exception {
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(cardinality("cardinality").precisionThreshold(precisionThreshold).field(multiNumericField(true)))
                 .get();
 
@@ -343,7 +343,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testSingleValuedStringScript() throws Exception {
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(
                         cardinality("cardinality")
                                 .precisionThreshold(precisionThreshold)
@@ -359,7 +359,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testMultiValuedStringScript() throws Exception {
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(
                         cardinality("cardinality")
                                 .precisionThreshold(precisionThreshold)
@@ -376,7 +376,7 @@ public class CardinalityIT extends ESIntegTestCase {
 
     public void testSingleValuedNumericScript() throws Exception {
         Script script = new Script(ScriptType.INLINE, CustomScriptPlugin.NAME, "doc[' + singleNumericField() + '].value", emptyMap());
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(cardinality("cardinality").precisionThreshold(precisionThreshold).script(script))
                 .get();
 
@@ -391,7 +391,7 @@ public class CardinalityIT extends ESIntegTestCase {
     public void testMultiValuedNumericScript() throws Exception {
         Script script =
             new Script(ScriptType.INLINE, CustomScriptPlugin.NAME, "doc[' + multiNumericField(false) + ']", Collections.emptyMap());
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(cardinality("cardinality").precisionThreshold(precisionThreshold).script(script))
                 .get();
 
@@ -404,7 +404,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testSingleValuedStringValueScript() throws Exception {
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(
                         cardinality("cardinality")
                                 .precisionThreshold(precisionThreshold)
@@ -421,7 +421,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testMultiValuedStringValueScript() throws Exception {
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(
                         cardinality("cardinality")
                                 .precisionThreshold(precisionThreshold)
@@ -438,7 +438,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testSingleValuedNumericValueScript() throws Exception {
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(
                         cardinality("cardinality")
                                 .precisionThreshold(precisionThreshold)
@@ -455,7 +455,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testMultiValuedNumericValueScript() throws Exception {
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(
                         cardinality("cardinality")
                                 .precisionThreshold(precisionThreshold)
@@ -472,7 +472,7 @@ public class CardinalityIT extends ESIntegTestCase {
     }
 
     public void testAsSubAgg() throws Exception {
-        SearchResponse response = client().prepareSearch("idx").setTypes("type")
+        SearchResponse response = client().prepareSearch("idx")
                 .addAggregation(terms("terms").field("str_value")
                         .collectMode(randomFrom(SubAggCollectionMode.values()))
                         .subAggregation(cardinality("cardinality").precisionThreshold(precisionThreshold).field("str_values")))
