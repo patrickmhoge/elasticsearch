@@ -28,7 +28,6 @@ import org.elasticsearch.common.bytes.BytesReference;
 import org.elasticsearch.common.compress.CompressedXContent;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
-import org.elasticsearch.common.xcontent.json.JsonXContent;
 import org.elasticsearch.index.IndexService;
 import org.elasticsearch.index.mapper.JsonFieldMapper.KeyedJsonFieldType;
 import org.elasticsearch.index.mapper.JsonFieldMapper.RootJsonFieldType;
